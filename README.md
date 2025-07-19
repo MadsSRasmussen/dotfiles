@@ -1,6 +1,6 @@
 # Dotfiles
 
-A collection of dotfiles - as originally setup on the Ubuntu Server "Osvald". The use of the repo hinges on *GNU Stow* to create symlinks to files in a ~/dotfiles/` directory.
+A collection of dotfiles - as originally setup on the Ubuntu Server "Osvald". The use of the repo hinges on *GNU Stow* to create symlinks to files in a `~/dotfiles/` directory.
 
 #### Setup instructions
 
