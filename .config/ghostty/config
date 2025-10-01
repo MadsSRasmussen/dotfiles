@@ -1,0 +1,6 @@
+# Color scheme for light and dark can be set via 
+# theme = light:Catppucin Latte, dark:Catppucin Mocha
+theme = Catppuccin Mocha
+
+font-size = 18
+font-feature = -calt, -liga, -dlig
