@@ -4,8 +4,6 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # Prompt
-PS1="%n@%m %~ %# "
-
 precmd() {
     git_branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
     PS1="%n@%m %~ ${git_branch:+ (}$git_branch${git_branch:+)} %# "
