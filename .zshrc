@@ -1,57 +1,20 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-# Source zinit
-source "${ZINIT_HOME}/zinit.zsh"
-
-# Add Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-# Add plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-
-# Load completions
-autoload -U compinit && compinit
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-
-# History
-HISTSIZE=5000
+# History settings
+HISTSIZE=1000
+SAVEHIST=1000
 HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
 
-# Completions styling
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# Prompt
+PS1="%n@%m %~ %# "
+
+precmd() {
+    git_branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
+    PS1="%n@%m %~ ${git_branch:+ (}$git_branch${git_branch:+)} %# "
+}
+
+# PATH configuration
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.scripts:$PATH"
 
 # Aliases
-alias ls='ls --color'
-. "/Users/mads/.deno/env"
-
-export PATH="$HOME/.scripts:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+alias vim="nvim"
+alias python="python3"
