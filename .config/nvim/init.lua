@@ -16,6 +16,8 @@ vim.opt.winborder = 'single'
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
 
+vim.opt.swapfile = false
+
 -- Setup keymaps
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
@@ -33,9 +35,6 @@ vim.keymap.set('i', '<C-space>', function()
     vim.lsp.completion.get()
 end, { desc = 'Get lsp completions' })
 
--- Setup colorscheme
-vim.cmd.colorscheme('default')
-
 -- Setup language servers
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
@@ -48,3 +47,42 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Enable language servers
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('ts_ls')
+
+-- Add plugins
+vim.pack.add({
+    { src = 'https://github.com/mason-org/mason.nvim', name = 'mason' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'master', name = 'nvim-treesitter' },
+    { src = 'https://github.com/vague2k/vague.nvim' },
+})
+
+-- Setup plugins
+require('mason').setup()
+require('nvim-treesitter.configs').setup({
+    ensure_installed = { 'lua', 'c', 'javascript', 'typescript' },
+    auto_install = false,
+    highlight = {
+        enable = true,
+    }
+})
+require('vague').setup()
+
+-- Setup plugin hooks
+vim.api.nvim_create_autocmd('PackChanged', {
+    desc = 'Handle nvim-treesitter updates',
+    group = vim.api.nvim_create_augroup('nvim-treesitter-pack-changed-update-handler', { clear = true }),
+    callback = function(args)
+        if args.data.kind == 'update' and args.data.spec.name == 'nvim-treesitter' then
+            vim.notify('nvim-treesitter updated, running :TSUpdate', vim.log.levels.INFO)
+            local ok = pcall(vim.cmd, 'TSUpdate')
+            if ok then
+                vim.notify('TSUpdate completed successfully!', vim.log.levels.INFO)
+            else
+                vim.notify('TSUpdate command not available yet, skipping', vim.log.levels.WARN)
+            end
+        end
+    end,
+})
+
+-- Setup colorscheme
+vim.cmd.colorscheme('vague')
