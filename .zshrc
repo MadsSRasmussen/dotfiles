@@ -6,7 +6,7 @@ HISTFILE=~/.zsh_history
 # Prompt
 precmd() {
     git_branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
-    PS1="%n@%m %~ ${git_branch:+ (}$git_branch${git_branch:+)} %# "
+    PS1="%B%F{blue}%~%b %F{red}${git_branch:+(}$git_branch${git_branch:+)} %f%B%#%b "
 }
 
 # PATH configuration
