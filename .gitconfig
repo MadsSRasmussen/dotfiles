@@ -8,3 +8,10 @@
     signingkey = ~/.ssh/id_ed25519.pub
 	email = madsrasmussendev@gmail.com
 	name = Mads Studsgaard Rasmussen
+
+[diff]
+    tool = nvimdiff
+
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+    prompt = false
