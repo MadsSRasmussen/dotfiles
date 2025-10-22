@@ -48,6 +48,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Enable language servers
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('ts_ls')
+vim.lsp.enable('rust_analyzer')
 
 -- Add plugins
 vim.pack.add({
@@ -59,7 +60,7 @@ vim.pack.add({
 -- Setup plugins
 require('mason').setup()
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'lua', 'c', 'javascript', 'typescript' },
+    ensure_installed = { 'lua', 'c', 'rust', 'javascript', 'typescript', 'html' },
     auto_install = false,
     highlight = {
         enable = true,
