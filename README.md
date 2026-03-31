@@ -1,14 +1,17 @@
-# Dotfiles
+# dotfiles
 
-A collection of dotfiles - as originally setup on the Ubuntu Server "Osvald". The use of the repo hinges on *GNU Stow* to create symlinks to files in a `~/dotfiles/` directory.
+## Table of contents
 
-#### Setup instructions
+- [Installtion instructions](#installation-instructions)
 
-- Create a `~/dotfiles/` directory in the home `~/`directory
-- Clone repository to the `~/dotfiles/` directory
+## Installation instructions
+
+The setup of a new machine is streamlined to be allmost identical for any supported operating system.
+
+This repository must be either pulled via git *(requires installation of git)* or copied from an external hdd.
+
+Once this is complete, running the `install.sh` bash script at the root of the repository, should start the setup script.
+
 ```bash
-git clone git@github.com:MadsSRasmussen/dotfiles.git
+./install.sh
 ```
-- Install `stow` with the system package-manager
-- Remove any dotfiles in the home `~/` folder that are also in the repo
-- Run `stow .` in the `~/dotfiles/` directory

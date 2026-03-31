@@ -18,3 +18,8 @@ alias ls='ls -F --color=auto'
 
 alias vim="nvim"
 alias python="python3"
+
+# Package specific commands
+if command -v fnm>/dev/null 2>&1; then # in case fnm
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi

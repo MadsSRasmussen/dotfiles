@@ -143,7 +143,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 -- Setup colorscheme
 -- vim.cmd.colorscheme('vague')
-vim.cmd.colorscheme('catppuccin')
+vim.cmd.colorscheme('vague')
 
 -- Custom commands
 vim.api.nvim_create_user_command('LspInfo', function()
