@@ -1,7 +1,0 @@
-default_runtime = "mistral-vibe"
-
-[paths]
-agents_dir = "~/.agents/agents"
-
-[runtimes.mistral-vibe]
-install_path = "~/.vibe"
