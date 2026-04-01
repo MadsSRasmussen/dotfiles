@@ -86,7 +86,7 @@ vim.lsp.enable('denols')
 -- Add plugins
 vim.pack.add({
     { src = 'https://github.com/mason-org/mason.nvim', name = 'mason' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'master', name = 'nvim-treesitter' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version='main', name = 'nvim-treesitter' },
     { src = 'https://github.com/vague2k/vague.nvim' },
     { src = 'https://github.com/catppuccin/nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
@@ -95,19 +95,19 @@ vim.pack.add({
 
 -- Setup plugins
 require('mason').setup()
-require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'vue', 'lua', 'c', 'rust', 'javascript', 'typescript', 'html', 'go' },
-    auto_install = false,
-    highlight = {
-        enable = true,
-    }
-})
 require('vague').setup()
 require('catppuccin').setup({ flavour = "latte" })
 require('plenary.async')
-local builtin = require('telescope.builtin')
 
--- Setup telescope keymaps
+-- Setup treesitter
+require('nvim-treesitter').install({ 'rust', 'go', 'javascript' })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'go' },
+  callback = function() vim.treesitter.start() end,
+})
+
+-- Setup telescope
+local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { desc = 'Telescope find references' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
@@ -143,7 +143,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 -- Setup colorscheme
 -- vim.cmd.colorscheme('vague')
-vim.cmd.colorscheme('vague')
+vim.cmd.colorscheme('catppuccin')
 
 -- Custom commands
 vim.api.nvim_create_user_command('LspInfo', function()
