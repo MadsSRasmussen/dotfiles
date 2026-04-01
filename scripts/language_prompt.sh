@@ -38,7 +38,7 @@ confirm_selections() {
         echo "  • $lang"
     done
 
-    read -rp $'\nProceed? [y/n]: ' confirm
+    read -rp $'\n  Proceed? [y/n]: ' confirm
     [[ "$confirm" == "y" ]]
 }
 

@@ -3,7 +3,8 @@ brew "neovim"
 brew "ripgrep"
 brew "fzf"
 
-brew "docker"
 brew "colima"
+brew "docker"
+brew "docker-compose"
 
 cask "ghostty"
