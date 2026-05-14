@@ -1,0 +1,26 @@
+package commands
+
+import (
+	"fmt"
+
+	"{{ .GoVanityDomain }}/{{ .Name }}/internal/cli"
+)
+
+type version struct {
+	version string
+}
+
+func NewVersion(ver string) *version {
+	return &version{
+		version: ver,
+	}
+}
+
+func (v *version) Name() string { return "version" }
+
+func (v *version) Description() string { return "Prints version" }
+
+func (v *version) Run(env *cli.Env, args []string) error {
+	fmt.Fprintln(env.Stdout, v.version)
+	return nil
+}

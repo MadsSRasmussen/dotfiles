@@ -1,0 +1,6 @@
+{
+    "variables": {
+        "GoVanityDomain": "go.studsgaard.dev",
+        "GoVersion": "1.26.1"
+    }
+}

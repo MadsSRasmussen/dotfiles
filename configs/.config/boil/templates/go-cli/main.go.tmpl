@@ -1,0 +1,31 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+    "{{ .GoVanityDomain }}/{{ .Name }}/internal/cli"
+    "{{ .GoVanityDomain }}/{{ .Name }}/internal/cli/commands"
+)
+
+var version = resolveVersion()
+
+func main() {
+
+    reg := cli.NewRegistry()
+
+    reg.Register(commands.NewVersion(version))
+
+    app := cli.NewApp(reg)
+
+	env := &cli.Env{
+		Stdin:  os.Stdin,
+		Stdout: os.Stdout,
+		Stderr: os.Stderr,
+	}
+
+	if err := app.Run(env, os.Args[1:]); err != nil {
+		fmt.Fprintln(env.Stderr, err)
+		os.Exit(1)
+	}
+}
